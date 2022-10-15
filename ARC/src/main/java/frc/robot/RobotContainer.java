@@ -2,6 +2,9 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+import frc.robot.commands.*;
+import frc.robot.subsystems.*;
+
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
@@ -16,17 +19,42 @@ import edu.wpi.first.wpilibj2.command.Command;
  * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
  * subsystems, commands, and button mappings) should be declared here.
  */
+
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+
+  public static Joystick joystick;
+  public static Joystick joystick2;
+
+  private final DriveToLine driveToLine;
+  private final DriveTrain dt;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    // Configure the button bindings
+    joystick = new Joystick(0);
+    joystick2 = new Joystick(1);
+
+    dt = new DriveTrain();
+    driveToLine = new DriveToLine(dt, 0.2);
     configureButtonBindings();
   }
+
+  public Command getAutonomousCommand() {
+    // An ExampleCommand will run in autonomous
+    return driveToLine;
+  }  
+
+  public static Joystick getJoy() {
+    return joystick;
+  }
+
+
+  public static Joystick getJoy2() {
+    return joystick2;
+  }
+
 
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
