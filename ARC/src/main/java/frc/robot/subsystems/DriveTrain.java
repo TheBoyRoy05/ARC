@@ -2,6 +2,8 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+package frc.robot.subsystems;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
@@ -16,8 +18,6 @@ import frc.robot.RobotContainer;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import com.kauailabs.navx.frc.AHRS;
-
-package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -36,7 +36,7 @@ public class DriveTrain extends SubsystemBase {
   private ShuffleboardTab DTLTab = Shuffleboard.getTab("Drive To Line");
   private NetworkTableEntry SwitchDirection = DTLTab.add("Direction", 1).getEntry();
   private NetworkTableEntry DTLDisplacement = DTLTab.add("Displacement", 0.0).getEntry();
-  private NetworkTableEntry DTLOffset = DTLTab.add("Displacement", 0.0).getEntry();
+  private NetworkTableEntry DTLOffset = DTLTab.add("Offset", 0.0).getEntry();
   private NetworkTableEntry LeftVelocity = DTLTab.add("Left Native Velocity", 0.0).getEntry();
   private NetworkTableEntry RightVelocity = DTLTab.add("Right Native Velocity", 0.0).getEntry();
 
@@ -96,6 +96,6 @@ public class DriveTrain extends SubsystemBase {
     LeftVelocity.setDouble(leftDriveTalon.getSelectedSensorVelocity());
     RightVelocity.setDouble(rightDriveTalon.getSelectedSensorVelocity());
     
-    tankDrive(RobotContainer.getJoy1().getY()*-0.2, RobotContainer.getJoy2().getY()*-0.2);
+    tankDrive(RobotContainer.getJoy().getY()*-0.2, RobotContainer.getJoy2().getY()*-0.2);
   }
 }

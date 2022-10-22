@@ -2,12 +2,13 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+package frc.robot;
+
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
-package frc.robot;
-
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -41,11 +42,6 @@ public class RobotContainer {
     configureButtonBindings();
   }
 
-  public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    return driveToLine;
-  }  
-
   public static Joystick getJoy() {
     return joystick;
   }
@@ -71,6 +67,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return driveToLine;
   }
 }
